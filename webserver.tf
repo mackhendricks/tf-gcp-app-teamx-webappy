@@ -4,7 +4,7 @@ resource "random_id" "instance_id" {
 }
 
 // A single Compute Engine instance
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "webserver" {
  name         = "webserver-${var.appname}"
  machine_type = "n1-standard-2"
  zone         = "us-central1-a"
@@ -34,7 +34,7 @@ resource "google_compute_instance" "default" {
 
 // A variable for extracting the external IP address of the instance
 output "ip" {
- value = google_compute_instance.default.network_interface.0.access_config.0.nat_ip
+ value = google_compute_instance.webserver.network_interface.0.access_config.0.nat_ip
 }
 
 
