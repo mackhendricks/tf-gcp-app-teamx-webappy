@@ -8,6 +8,7 @@ resource "google_compute_instance" "webserver" {
  name         = "webserver-${var.appname}"
  machine_type = "n1-standard-2"
  zone         = "us-central1-a"
+ allow_stopping_for_update = true
  tags = ["http-server", "https-server"]
 
  boot_disk {
@@ -20,7 +21,7 @@ resource "google_compute_instance" "webserver" {
  metadata_startup_script = "sudo apt-get update && apt-get install -y git nginx"
 
  network_interface {
-   network = "vpc-prod"
+   network = "vpc-dev"
 
    access_config {
      // Include this section to give the VM an external ip address
